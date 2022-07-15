@@ -1,0 +1,10 @@
+ul,li{list-style: none}
+p{margin:0;padding:0;}
+.g-top{
+    width: 552px;
+    height: 545px;
+    box-sizing: border-box;
+    padding: 47px 55px;
+    background: no-repeat url("../../assets/img/pop-bg.png");
+    background-size: 100% 100%;
+}

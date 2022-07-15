@@ -1,0 +1,186 @@
+/*flex布局*/
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    height: 100%
+}
+.flex-grow{
+    flex: 1;
+}
+.flex-item{
+    flex: 1;
+    box-sizing: border-box;
+}
+
+/*整体布局排版*/
+.zjd-container{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../assets/img/bag.png") no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+}
+.zjd-header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    color: #CCDAFF;
+    height: 92px;
+    background: url("../assets/img/header.png") no-repeat;
+    background-size: 100% 100%;
+}
+.flex-bag{
+    background: rgba(2,55,131,0.70);
+    border-radius: 16px;
+    margin-bottom: 14px;
+}
+.zjd-body {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: 92px 26px 0;
+    /*background: url("../../assets/img/verification-border.png");*/
+    background-size: 100% 100%;
+}
+.body-l{
+    width: 26%;
+    box-sizing: border-box;
+}
+.body-c{
+    width: 48%;
+    box-sizing: border-box;
+}
+.body-r{
+    width: 26%;
+    box-sizing: border-box;
+}
+
+
+
+/*返回首页*/
+.map-center-box{
+    position: relative;
+    z-index: 999;
+}
+
+
+
+/*左上角地图*/
+.map-box{
+    width: 300%;
+    height: 300%;
+    position: absolute;
+    left: 50%;
+    top: -15%;
+    transform: translate(-50%,0) scale(0.45);
+    transform-origin: 50% 0;
+}
+/*中间地图*/
+.top-maps{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width:80%;
+    height:70%;
+}
+/* 地图下方，展开图标 */
+.map-bott-box{
+	width: 25px;height: 25px;
+	position: absolute;
+	right: 0px;
+	top: 10px;
+	cursor: pointer;
+	z-index: 999;
+}
+.map-bott-box image{
+	width: 100%;
+	height: 100%;
+}
+.flex-height-auto{
+	flex: 1;
+	height: auto;
+}
+.flex-height-none{
+	height: 0px;
+}
+@media screen and (max-width: 1400px) {
+    .body-l{
+        padding: 90px 25px 0 20px;
+    }
+
+    .body-r{
+        padding: 90px 20px 0 25px;
+    }
+}
+
+/*@media only screen and (min-width: 1400px) and (max-width: 1800px){*/
+/*    .item-header,.qchz-bar-item,.ring-num{*/
+/*        font-size: 14px !important;*/
+/*    }*/
+/*    .right-outlogin{*/
+/*        font-weight: normal;*/
+/*        font-size: 12px;*/
+/*    }*/
+/*	.right-outlogin img{*/
+/*		width: 14px;*/
+/*		height: 14px;*/
+/*		margin-right: 12px;*/
+/*	}*/
+/*    .list-zc-sl,.qchz-list ul li,.header-right,.ring-name,.zcsl-list,.el-dropdown-link{*/
+/*        font-size: 12px !important;*/
+/*    }*/
+/*    .item-header{*/
+/*        padding: 5px 0 !important;*/
+/*    }*/
+/*    .zjd-header{*/
+/*        padding: 0 !important;*/
+/*    }*/
+/*    .header-center{*/
+/*        font-size: 28px;*/
+/*    }*/
+/*    .header-center p:nth-of-type(2){*/
+/*        font-size: 22px;*/
+/*    }*/
+/*    .header-banner{*/
+/*        margin-top: 55px;*/
+/*    }*/
+/*}*/
+
+
+/*@media screen and (max-width:1400px) {*/
+/*    .item-header,.qchz-bar-item,.qchz-list ul li,.list-zc-sl,.ring-num,.el-dropdown-link{*/
+/*        font-size: 12px !important;*/
+/*    }*/
+/*    .ring-name,.zcsl-list{*/
+/*        font-size: 10px !important;*/
+/*    }*/
+/*    .right-outlogin{*/
+/*        margin: 0;*/
+/*        font-weight:normal;*/
+/*        font-size: 12px;*/
+/*    }*/
+/*	.right-outlogin img{*/
+/*		width: 13px;*/
+/*		height: 13px;*/
+/*		margin-right: 11px;*/
+/*	}*/
+/*    .header-center{*/
+/*        font-size: 26px;*/
+/*    }*/
+/*    .header-center p:nth-of-type(2){*/
+/*        font-size: 20px;*/
+/*    }*/
+/*}*/
