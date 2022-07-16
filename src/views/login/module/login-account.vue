@@ -66,7 +66,7 @@
     .el-form{
         margin-top: 50px;
     }
-    ::v-deep.el-input__inner{
+    /deep/.el-input__inner{
         width: 442px;
         height: 56px;
         border: 1px solid #1489CC;

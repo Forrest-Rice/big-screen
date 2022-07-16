@@ -25,8 +25,10 @@
     "element-ui": "^2.4.5",
     "js-cookie": "^2.2.0",
     "mockjs": "^1.0.1-beta3",
+    "node-sass": "^7.0.1",
     "nprogress": "^0.2.0",
     "postcss-px2rem": "^0.3.0",
+    "sass-loader": "^10",
     "screenfull": "^5.0.2",
     "script-loader": "^0.7.2",
     "sortablejs": "^1.10.0-rc2",
@@ -43,9 +45,7 @@
     "chai": "^4.1.2",
     "vue-awesome-swiper": "~2.6.7",
     "vue-template-compiler": "^2.5.17",
-    "webpack-bundle-analyzer": "^3.0.3",
-    "sass": "^1.53.0",
-    "sass-loader": "^10"
+    "webpack-bundle-analyzer": "^3.0.3"
   },
   "lint-staged": {
     "*.js": [

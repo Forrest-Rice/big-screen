@@ -139,14 +139,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-::v-deep.el-form-item__label{
+/deep/.el-form-item__label{
   font-size: 18px;
   font-family: Source Han Sans CN;
   font-weight: 500;
   color: #1ADCFF;
   line-height: 52px;
 }
-::v-deep.el-input__inner{
+/deep/.el-input__inner{
   width: 100%;
   height: 48px;
   border: 1px solid #1489CC;
@@ -188,7 +188,7 @@ export default {
   a{
     color: #0D96CC;
   }
-  /*::v-deep.el-checkbox__inner{*/
+  /*/deep/.el-checkbox__inner{*/
   /*    background-color: #1ADCFF;*/
   /*    border-color: #1ADCFF;*/
   /*}*/

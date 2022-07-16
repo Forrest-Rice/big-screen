@@ -1,6 +1,6 @@
 <template>
   <el-form :model="ruleForm" :rules="rules" label-position="left" ref="ruleForm" label-width="120px"
-           class="demo-ruleForm">
+    class="demo-ruleForm">
     <el-form-item label="*  用户类型" prop="type">
       <el-select v-model="ruleForm.type" style="width: 100%">
         <el-option label="区域一" value="shanghai"></el-option>
@@ -36,17 +36,21 @@
     <!--协议第一步-->
     <agreement ref="agreement" @next="next()"></agreement>
     <!--协议第二步（信息录入）-->
-    <entering ref="entering"></entering>
+    <entering ref="entering" @next="nextThree()"></entering>
+    <!-- 协议第三步(入录指标) -->
+    <entryMetrics ref="entryMetricsRef"></entryMetrics>
   </el-form>
 </template>
 <script>
 import agreement from "./agreement";
 import Entering from "./entering";
+import entryMetrics from './entryMetrics'
 export default {
   name: "register",
-  components:{
+  components: {
     Entering,
-    agreement
+    agreement,
+    entryMetrics
   },
   data() {
     var validateType = (rule, value, callback) => {
@@ -96,21 +100,21 @@ export default {
       ruleForm: {
         type: '',
         phone: '',
-        pwd:'',
-        code:''
+        pwd: '',
+        code: ''
       },
       rules: {
         type: [
-          {validator: validateType, trigger: 'change'}
+          { validator: validateType, trigger: 'change' }
         ],
         phone: [
-          {validator: validatePhone, trigger: 'blur'}
+          { validator: validatePhone, trigger: 'blur' }
         ],
         pwd: [
-          {validator: validatePwd, trigger: 'blur'}
+          { validator: validatePwd, trigger: 'blur' }
         ],
         code: [
-          {validator: validateCodeMsg, trigger: 'blur'}
+          { validator: validateCodeMsg, trigger: 'blur' }
         ],
       }
     };
@@ -137,7 +141,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$emit('affirm','1')
+          this.$emit('affirm', '1')
         } else {
           console.log('error submit!!');
           return false;
@@ -152,13 +156,16 @@ export default {
     },
     next() {
       this.$refs.entering.init()
+    },
+    nextThree() {
+      this.$refs.entryMetricsRef.init()
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-::v-deep .el-form-item__label {
+/deep/ .el-form-item__label {
   font-size: 18px;
   font-family: Source Han Sans CN;
   font-weight: 500;
@@ -166,7 +173,7 @@ export default {
   line-height: 52px;
 }
 
-::v-deep .el-input__inner {
+/deep/ .el-input__inner {
   width: 100%;
   height: 48px;
   border: 1px solid #1489CC;
@@ -216,7 +223,7 @@ export default {
     color: #0D96CC;
   }
 
-  /*::v-deep.el-checkbox__inner{*/
+  /*/deep/.el-checkbox__inner{*/
   /*    background-color: #1ADCFF;*/
   /*    border-color: #1ADCFF;*/
   /*}*/

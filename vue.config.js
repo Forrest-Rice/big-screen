@@ -14,6 +14,13 @@ module.exports = {
   //         }
   //     }
   // },
+  // configureWebpack :{
+  //   resolve: {
+  //     alias: {
+  //     },
+  //   },
+  // },
+
   chainWebpack: (config) => {
     //忽略的打包文件
     config.externals({

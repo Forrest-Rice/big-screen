@@ -111,7 +111,7 @@
     //登录页面
     .login-left {
         //display: none !important;
-        ::v-deep.el-button{
+        /deep/.el-button{
             margin: 0 auto!important;
             text-align: center!important;
             padding: 0 !important;

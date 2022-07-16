@@ -93,7 +93,7 @@ export default {
 .el-form{
   margin-top: 50px;
 }
-::v-deep.el-input__inner{
+/deep/.el-input__inner{
   width: 442px;
   height: 56px;
   border: 1px solid #1489CC;
@@ -163,7 +163,7 @@ export default {
   border-color: #1ADCFF;
 }
 .codeInput{
-  ::v-deep.el-input__inner{
+  /deep/.el-input__inner{
     width: 100%;
     padding-left: 25px;
   }
