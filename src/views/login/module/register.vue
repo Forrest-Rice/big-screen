@@ -39,18 +39,22 @@
     <entering ref="entering" @next="nextThree()"></entering>
     <!-- 协议第三步(入录指标) -->
     <entryMetrics ref="entryMetricsRef"></entryMetrics>
+    <!-- 企业协议查询 -->
+    <enterpriseMetrics ref="enterpriseMetricsRef"></enterpriseMetrics>
   </el-form>
 </template>
 <script>
 import agreement from "./agreement";
 import Entering from "./entering";
 import entryMetrics from './entryMetrics'
+import enterpriseMetrics from './enterpriseMetrics'
 export default {
   name: "register",
   components: {
     Entering,
     agreement,
-    entryMetrics
+    entryMetrics,
+    enterpriseMetrics
   },
   data() {
     var validateType = (rule, value, callback) => {
@@ -158,6 +162,7 @@ export default {
       this.$refs.entering.init()
     },
     nextThree() {
+      // this.$refs.enterpriseMetricsRef.init()
       this.$refs.entryMetricsRef.init()
     }
   }

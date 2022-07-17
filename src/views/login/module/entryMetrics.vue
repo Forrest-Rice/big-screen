@@ -260,17 +260,16 @@ export default {
     justify-content: space-between;
     margin-top: 30px;
 
+    overflow-y: auto;
+
     .left-box {
       width: 44%;
       height: 100%;
-      overflow-y: auto;
     }
 
     .right-box {
       width: 44%;
       height: 100%;
-
-      overflow-y: auto;
     }
 
     .title-row {
