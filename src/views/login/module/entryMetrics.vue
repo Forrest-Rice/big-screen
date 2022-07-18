@@ -1,7 +1,7 @@
 <!--
  * @Author: By
  * @Date: 2022-07-16 18:40:24
- * @LastEditTime: 2022-07-18 20:17:10
+ * @LastEditTime: 2022-07-18 23:16:48
  * @LastEditors: By
  * @Description: 入录指标弹窗
  * @FilePath: \big-screen\src\views\login\module\entryMetrics.vue
@@ -92,7 +92,7 @@
     <!-- 单个删除弹窗 -->
     <deleteMetrics ref="addMetricsRef" />
     <!-- 提交成功弹窗 -->
-    <submitSucceed ref="submitSucceedRef"></submitSucceed>
+    <submitSucceed ref="submitSucceedRef" @submitSucceed="submitSucceed"></submitSucceed>
   </div>
 </template>
 <script >
@@ -100,7 +100,7 @@ import deleteMetrics from './deleteMetrics'
 import submitSucceed from './submitSucceed'
 export default {
   name: 'entryMetrics',
-  data () {
+  data() {
     return {
       dialogVisible: false,
       operateList: ['新增指标', '删除指标', '全选'],
@@ -118,7 +118,7 @@ export default {
     }
   },
   components: { deleteMetrics, submitSucceed },
-  created () {
+  created() {
     const temp = []
     const temp2 = []
     for (let index = 0; index < 20; index++) {
@@ -128,16 +128,16 @@ export default {
     this.indicatorList = [temp, temp2]
   },
   methods: {
-    next () {
+    next() {
 
     },
-    init () {
+    init() {
       this.dialogVisible = true
     },
-    close () {
+    close() {
       this.dialogVisible = false
     },
-    changeOperate (val) {
+    changeOperate(val) {
       const allSelect = () => {
         this.indicatorList.forEach(element => {
           element.forEach(eleItem => {
@@ -154,7 +154,7 @@ export default {
       funMap.get(val).call()
       this.operateFlag = val
     },
-    save () {
+    save() {
       this.close()
     },
 
@@ -162,7 +162,7 @@ export default {
      * @description: 提交方法
      * @return {*}
      */
-    submit () {
+    submit() {
       // 提交错误
       // this.$emit('submitError')
       // this.close()
@@ -170,8 +170,12 @@ export default {
       this.$refs.submitSucceedRef.init()
 
     },
-    back () {
+    back() {
       this.close()
+    },
+    submitSucceed() {
+      this.dialogVisible = false
+      
     }
   }
 
