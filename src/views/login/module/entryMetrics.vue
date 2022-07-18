@@ -1,7 +1,7 @@
 <!--
  * @Author: By
  * @Date: 2022-07-16 18:40:24
- * @LastEditTime: 2022-07-17 02:08:36
+ * @LastEditTime: 2022-07-18 20:17:10
  * @LastEditors: By
  * @Description: 入录指标弹窗
  * @FilePath: \big-screen\src\views\login\module\entryMetrics.vue
@@ -18,8 +18,10 @@
       </div>
       <header>
         <div class="operate-button-box">
-          <div class="operate-botton-item" v-for="(item, index) in operateList" :key="index"
-            :class="operateFalg === index ? 'click' : ''" @click="changeOperate(index)">{{ item }}</div>
+          <el-button class="operate-botton-item" v-for="(item, index) in operateList" :key="index" type="primary "
+            @click="changeOperate(index)">
+            {{ item }}
+          </el-button>
         </div>
       </header>
       <main>
@@ -27,11 +29,13 @@
           <div class="title-row">
             <div class="title" v-for="(item, index) in titleList" :key="index"> {{ item.label }}</div>
           </div>
-          <div class="content-row" v-for="(item, index) in indicatorList" :key="index">
-            <div class="content">
-              <el-image class="indicator-image" :src="tishiImage" fit="cover"></el-image>
-              <span class="indicator-code">{{ item.indicatorCode }}</span>
-            </div>
+          <div class="content-row" v-for="(item, index) in indicatorList[0]" :key="index">
+            <el-checkbox v-model="item.check">
+              <div class="content">
+                <el-image class="indicator-image" :src="tishiImage" fit="cover"></el-image>
+                <span class="indicator-code">{{ item.indicatorCode }}</span>
+              </div>
+            </el-checkbox>
             <div class="content">
               <el-input class="indicator-input" suffix-icon="el-icon-edit" v-model="item.indicatorName"
                 placeholder="Please input" />
@@ -48,11 +52,13 @@
           <div class="title-row">
             <div class="title" v-for="(item, index) in titleList" :key="index"> {{ item.label }}</div>
           </div>
-          <div class="content-row" v-for="(item, index) in indicatorList" :key="index">
-            <div class="content">
-              <el-image class="indicator-image" :src="tishiImage" fit="cover"></el-image>
-              <span class="indicator-code">{{ item.indicatorCode }}</span>
-            </div>
+          <div class="content-row" v-for="(item, index) in indicatorList[1]" :key="index">
+            <el-checkbox v-model="item.check">
+              <div class="content">
+                <el-image class="indicator-image" :src="tishiImage" fit="cover"></el-image>
+                <span class="indicator-code">{{ item.indicatorCode }}</span>
+              </div>
+            </el-checkbox>
             <div class="content">
               <el-input class="indicator-input" suffix-icon="el-icon-edit" v-model="item.indicatorName"
                 placeholder="Please input" />
@@ -82,16 +88,23 @@
 
       </footer>
     </div>
+
+    <!-- 单个删除弹窗 -->
+    <deleteMetrics ref="addMetricsRef" />
+    <!-- 提交成功弹窗 -->
+    <submitSucceed ref="submitSucceedRef"></submitSucceed>
   </div>
 </template>
 <script >
+import deleteMetrics from './deleteMetrics'
+import submitSucceed from './submitSucceed'
 export default {
   name: 'entryMetrics',
-  data() {
+  data () {
     return {
       dialogVisible: false,
       operateList: ['新增指标', '删除指标', '全选'],
-      operateFalg: 0,
+      operateFlag: 0,
       leftTableData: [],
       rightTableData: [],
       titleList: [
@@ -101,39 +114,63 @@ export default {
         { label: '指标单位', span: 5 }
       ],
       tishiImage: require('@/assets/img/userAgreement/tishi.png'),
-      indicatorList: [
-        { indicatorCode: '111', indicatorName: 'aa' }
-      ]
+      indicatorList: []
     }
-
   },
-  created() {
+  components: { deleteMetrics, submitSucceed },
+  created () {
+    const temp = []
+    const temp2 = []
     for (let index = 0; index < 20; index++) {
-      this.indicatorList.push({ indicatorCode: '111', indicatorName: 'aa', indicatorData: '22', indicatorUnit: '亿元' })
-
+      temp.push({ indicatorCode: `${index}left`, indicatorName: 'aa', indicatorData: '22', indicatorUnit: '亿元', check: false })
+      temp2.push({ indicatorCode: `${index}right`, indicatorName: 'aa', indicatorData: '22', indicatorUnit: '亿元', check: false })
     }
-
+    this.indicatorList = [temp, temp2]
   },
   methods: {
-    next() {
+    next () {
 
     },
-    init() {
+    init () {
       this.dialogVisible = true
     },
-    close() {
+    close () {
       this.dialogVisible = false
     },
-    changeOperate(val) {
-      this.operateFalg = val
+    changeOperate (val) {
+      const allSelect = () => {
+        this.indicatorList.forEach(element => {
+          element.forEach(eleItem => {
+            eleItem.check = true
+          })
+        });
+      }
+
+      const add = () => {
+        this.$refs.addMetricsRef.init()
+      }
+
+      const funMap = new Map().set(2, allSelect).set(1, add)
+      funMap.get(val).call()
+      this.operateFlag = val
     },
-    save() {
+    save () {
       this.close()
     },
-    submit() {
-      this.close()
+
+    /**
+     * @description: 提交方法
+     * @return {*}
+     */
+    submit () {
+      // 提交错误
+      // this.$emit('submitError')
+      // this.close()
+      // 提交成功
+      this.$refs.submitSucceedRef.init()
+
     },
-    back() {
+    back () {
       this.close()
     }
   }
@@ -231,12 +268,23 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: #023898;
 
+      span {
+        font-size: 14px;
+        font-family: Source Han Sans CN;
+        font-weight: 500;
+        color: #1ADCFF;
+      }
 
-      font-size: 14px;
-      font-family: Source Han Sans CN;
-      font-weight: 500;
-      color: #1ADCFF;
+      &:active {
+        background: #1ADCFF;
+
+        span {
+          color: #FFFFFF;
+        }
+      }
+
 
       &:first-child {
         margin-left: 0;
@@ -303,6 +351,11 @@ export default {
 
     .content-row {
       display: flex;
+
+      ::v-deep .el-checkbox {
+        display: flex;
+        align-items: center;
+      }
 
       .content {
         width: 80px;

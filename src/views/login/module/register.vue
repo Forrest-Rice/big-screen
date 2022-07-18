@@ -38,25 +38,23 @@
     <!--协议第二步（信息录入）-->
     <entering ref="entering" @next="nextThree()"></entering>
     <!-- 协议第三步(入录指标) -->
-    <entryMetrics ref="entryMetricsRef"></entryMetrics>
+    <entryMetrics ref="entryMetricsRef" @submitError="submitError"></entryMetrics>
     <!-- 企业协议查询 -->
     <enterpriseMetrics ref="enterpriseMetricsRef"></enterpriseMetrics>
+    <!-- 提交失败弹窗-->
+    <submitError ref="submitErrorRef" @goBack="goBack"></submitError>
   </el-form>
 </template>
 <script>
 import agreement from "./agreement";
 import Entering from "./entering";
-import entryMetrics from './entryMetrics'
-import enterpriseMetrics from './enterpriseMetrics'
+import enterpriseMetrics from './enterpriseMetrics';
+import entryMetrics from './entryMetrics';
+import submitError from './submitError';
 export default {
   name: "register",
-  components: {
-    Entering,
-    agreement,
-    entryMetrics,
-    enterpriseMetrics
-  },
-  data() {
+  components: { Entering, agreement, entryMetrics, enterpriseMetrics, submitError },
+  data () {
     var validateType = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请选择活动区域'));
@@ -124,13 +122,13 @@ export default {
     };
   },
   methods: {
-    send() {
+    send () {
       if (!this.isClick) return
       this.isClick = false
       this.countdown()
     },
     //倒计时
-    countdown() {
+    countdown () {
       clearInterval(timer)
       this.countdownTime = 60
       let timer = setInterval(() => {
@@ -142,7 +140,7 @@ export default {
         }
       }, 1000)
     },
-    submitForm(formName) {
+    submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$emit('affirm', '1')
@@ -152,17 +150,31 @@ export default {
         }
       });
     },
-    resetForm(formName) {
+    resetForm (formName) {
       this.$refs[formName].resetFields();
     },
-    showPop() {
+    showPop () {
       this.$refs.agreement.init()
     },
-    next() {
+    next () {
       this.$refs.entering.init()
     },
-    nextThree() {
+    nextThree () {
       // this.$refs.enterpriseMetricsRef.init()
+      this.$refs.entryMetricsRef.init()
+    },
+    /**
+     * @description: 提交失败
+     * @return {*}
+     */
+    submitError () {
+      this.$refs.submitErrorRef.init()
+    },
+    /**
+     * @description: 提交失败弹窗返回修改方法
+     * @return {*}
+     */
+    goBack () {
       this.$refs.entryMetricsRef.init()
     }
   }
