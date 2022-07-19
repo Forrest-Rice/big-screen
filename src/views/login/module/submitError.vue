@@ -1,10 +1,10 @@
 <!--
  * @Author: By
  * @Date: 2022-07-18 15:51:39
- * @LastEditTime: 2022-07-18 19:21:27
+ * @LastEditTime: 2022-07-20 01:15:51
  * @LastEditors: By
- * @Description: 
- * @FilePath: \big-screen\src\views\login\module\submitError.Vue
+ * @Description: 提交失败弹窗
+ * @FilePath: \big-screen\src\views\login\module\submitError.vue
  * 可以输入预定的版权声明、个性签名、空行等
 -->
 <template>

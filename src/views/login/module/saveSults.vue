@@ -1,56 +1,55 @@
 <!--
  * @Author: By
- * @Date: 2022-07-18 19:23:50
- * @LastEditTime: 2022-07-19 21:29:46
+ * @Date: 2022-07-20 01:20:35
+ * @LastEditTime: 2022-07-20 01:27:50
  * @LastEditors: By
- * @Description: 提交成功弹窗组件
- * @FilePath: \big-screen\src\views\login\module\submitSucceed.vue
+ * @Description: 保存结果
+ * @FilePath: \big-screen\src\views\login\module\saveSults.vue
  * 可以输入预定的版权声明、个性签名、空行等
 -->
+
 <template>
-    <div class="submit-succeed-box" v-if="dialogVisible">
+    <div class="save-results-box" v-if="dialogVisible">
         <div class="enterContent">
             <header>
                 <el-image class="close-btn" @click="close" :src="closeImage" fit="cover"></el-image>
             </header>
             <main>
-                <span class="main-span">恭喜您，提交成功</span>
+                <span v-if="results" class="main-span">保存成功</span>
+                <span v-if="!results" class="main-span">保存失败</span>
             </main>
             <footer>
                 <el-button class="confirm-button" @click="confirm" type="primary">确认</el-button>
             </footer>
         </div>
-
     </div>
 </template>
-
 <script>
+
 export default {
-    name: 'submitSucceed',
     data() {
         return {
-            dialogVisible: false,
-            closeImage: require('@/assets/img/pop-close.png'),
+            results: false,
+            dialogVisible: false
         }
     },
     methods: {
-        init() {
+        init(flag) {
+            this.results = flag
             this.dialogVisible = true
         },
         close() {
-            this.dialogVisible = true
+            this.dialogVisible = false
         },
         confirm() {
 
-            this.dialogVisible = true
-            this.$emit('submitSucceed')
+            this.dialogVisible = false
         }
     }
 }
-
 </script>
 <style lang="scss" scoped>
-.submit-succeed-box {
+.save-results-box {
     width: 100vw;
     height: 100vh;
     display: flex;
