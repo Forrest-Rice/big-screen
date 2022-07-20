@@ -1,7 +1,7 @@
 <!--
  * @Author: By
  * @Date: 2022-07-18 15:51:39
- * @LastEditTime: 2022-07-20 01:15:51
+ * @LastEditTime: 2022-07-21 00:50:58
  * @LastEditors: By
  * @Description: 提交失败弹窗
  * @FilePath: \big-screen\src\views\login\module\submitError.vue
@@ -17,7 +17,6 @@
                 <div class="main-content" v-for="(item, index) in optionList" :key="index">
                     <div class="content-item" v-for="(contentItem, contentIndex) in item" :key="contentIndex">
                         <span>{{ contentItem.label }}</span>
-                        <!-- <el-image style="width: 100px; height: 100px" :src="url" :fit="fit"></el-image> -->
                         <i v-if="contentItem.value" class="el-icon-check"></i>
                         <i v-else class="el-icon-close"></i>
                     </div>

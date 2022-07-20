@@ -42,7 +42,6 @@ export default {
             this.dialogVisible = false
         },
         confirm() {
-
             this.dialogVisible = false
         }
     }
