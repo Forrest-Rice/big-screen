@@ -22,8 +22,25 @@
     </div>
     <div class="pandect-right">
       <div class="progress-bar-box">
-        <div class="progress-main" />
+        <div class="progress-main">
+          <div class="progress" />
+        </div>
+        <span class="progress-value">65%</span>
       </div>
+      <span class="pandect-title">五好园区建设进度</span>
+      <div class="data-overview-box">
+        <div class="data-overview-item" v-for="(item, index) in dataOverViewList" :key="index">
+          <el-image class="data-overview-bg" :src="item.bg" fit="cover"></el-image>
+          <div class="data-box">
+            <span class="data">
+              {{ item.value }}
+              <span class="data-unit">{{ item.unit }}</span>
+            </span>
+            <span class="data-title">{{ item.label }}</span>
+          </div>
+        </div>
+      </div>
+
     </div>
     <!-- 文字弹框样式 -->
     <tips :imgPath="'pwd.png'" :btnType='2' :btnMsg="'恭喜您，注册成功'" @close="tipClose" @change="tipChange"></tips>
@@ -69,7 +86,22 @@ export default {
   components: { PopEnd, PopPassTwo, PopFaileTwo, PopPass, PopFaile, Pie3d, AcrossBar, tips, DataRank, MapZoning },
   data() {
     return {
-
+      dataOverViewList: [
+        { label: '规划面积', bg: require('@/assets/img/pandect/planArea.png'), value: 55.5, unit: '亩' },
+        { label: '亩均指数', bg: require('@/assets/img/pandect/mujunzhishu.png'), value: '44%', unit: '' },
+        { label: '高新技术企业', bg: require('@/assets/img/pandect/gaoxinjishuqiye.png'), value: 152, unit: '家' },
+        { label: '专精特新企业', bg: require('@/assets/img/pandect/zhunjingtexinqiye.png'), value: 134, unit: '家' },
+        { label: '工业总产值', bg: require('@/assets/img/pandect/gongyezongchanzhi.png'), value: 464.02, unit: '亿元' },
+        { label: '政府补贴', bg: require('@/assets/img/pandect/zhengfubutie.png'), value: 215.13, unit: '亿元' },
+        { label: '营业收入', bg: require('@/assets/img/pandect/yingyeshouru.png'), value: 465.13, unit: '亿元' },
+        { label: '利润总额', bg: require('@/assets/img/pandect/liyunzonge.png'), value: 312.07, unit: '亿元' },
+        { label: '税收总额', bg: require('@/assets/img/pandect/suishouzonge.png'), value: 345.19, unit: '亿元' },
+        { label: '工业增长值', bg: require('@/assets/img/pandect/industrialGrowth.png'), value: 312.07, unit: '亿元' },
+        { label: '规上企业从业人数 ', bg: require('@/assets/img/pandect/congyerenshu.png'), value: 864310, unit: '人' },
+        { label: '电耗', bg: require('@/assets/img/pandect/dianhao.png'), value: 341.01, unit: '万度' },
+        { label: '能耗', bg: require('@/assets/img/pandect/nenghao.png'), value: 345.12, unit: '万度' },
+        { label: '规上企业', bg: require('@/assets/img/pandect/guishangqiye.png'), value: 125, unit: '家' },
+      ]
     }
   },
   methods: {
@@ -174,29 +206,135 @@ export default {
   .pandect-right {
     width: 510px;
     height: 820px;
-    background: #00a680;
     display: flex;
     flex-direction: column;
     align-content: flex-start;
     justify-content: flex-start;
+    position: relative;
 
     .progress-bar-box {
-      width: calc(100% - 55px);
+      width: 100%;
       height: 25px;
-      background-color: #00B5FD;
-      border-radius: 15px;
       position: relative;
-      overflow: hidden;
+      display: flex;
+      align-items: center;
 
       .progress-main {
-        width: 65%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        // background: red;
+        width: calc(100% - 55px);
+        height: 25px;
+        background-color: #00B5FD;
         border-radius: 15px;
-        background-image: repeating-linear-gradient(-45deg, #009DFC, #009DFC 7px, #00F3FE 0, #00F3FE 15px);
+        position: relative;
+        overflow: hidden;
+
+        .progress {
+          width: 65%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-radius: 15px;
+          background-image: repeating-linear-gradient(-45deg, #009DFC, #009DFC 5px, #00F3FE 0, #00F3FE 7px);
+        }
+      }
+
+      .progress-value {
+        width: 55px;
+        height: 25px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 18px;
+        font-family: Source Han Sans CN;
+        font-weight: 400;
+        color: #00B5FD;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+      }
+    }
+
+    .pandect-title {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin-top: 15px;
+
+      font-size: 18px;
+      font-family: Source Han Sans CN;
+      font-weight: 400;
+      color: #00B5FD;
+    }
+
+    .data-overview-box {
+      margin-top: 47px;
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+
+      .data-overview-item {
+        width: 235px;
+        height: 83px;
+        margin: 11px 19px;
+        position: relative;
+
+        &:nth-child(odd) {
+          margin-left: 0;
+        }
+
+        &:nth-child(even) {
+          margin-right: 0;
+        }
+
+        &:nth-last-of-type(-n+2) {
+          margin-bottom: 0;
+        }
+
+        &:nth-child(-n+2) {
+          margin-top: 0;
+        }
+
+        ::v-deep .data-overview-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        .data-box {
+          margin-left: 84px;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          // align-items: center;
+              justify-content: center;
+
+          .data {
+            font-size: 26px;
+            font-family: Source Han Sans CN;
+            font-weight: 500;
+            color: #F8B62D;
+            // line-height: 24px;
+          }
+
+          .data-unit {
+            font-size: 12px;
+            font-family: Source Han Sans CN;
+            font-weight: 400;
+            color: #FFFFFF;
+          }
+
+          .data-title {
+            // margin-top: 8px;
+            font-size: 14px;
+            font-family: Source Han Sans CN;
+            font-weight: 400;
+            color: #FFFFFF;
+          }
+        }
       }
     }
   }
