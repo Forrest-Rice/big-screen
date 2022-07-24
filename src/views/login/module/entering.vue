@@ -1,27 +1,48 @@
 <template>
   <div class="entering" v-if="isShow">
     <div class="enterContent">
-      <img class="close-btn" src="../../../assets/img/pop-close.png" @click="close" />
+      <img
+        class="close-btn"
+        src="../../../assets/img/pop-close.png"
+        @click="close"
+      />
       <div class="popTitle">
         <div class="t">录入企业、园区信息</div>
         <img class="titleLine" src="../../../assets/img/biaoqian2.png" />
       </div>
       <div class="enterFrom">
         <div class="enterItem" v-for="(item, index) in formList" :key="index">
-          <img class="zd" src="../../../assets/img/zhongdian.png" alt="">
+          <img class="zd" src="../../../assets/img/zhongdian.png" alt="" />
           <div class="itemName">{{ item.title }}</div>
           <div class="select">
-            <el-select v-model="item.val" v-if="item.type == 'select'" :placeholder="item.placeholder">
-              <el-option v-for="item in item.option == 'option' ? options : options2" :key="item.value"
-                :label="item.label" :value="item.value">
+            <el-select
+              v-model="item.val"
+              v-if="item.type == 'select'"
+              :placeholder="item.placeholder"
+            >
+              <el-option
+                v-for="item in item.option == 'option' ? options : options2"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
               </el-option>
             </el-select>
-            <el-input v-model="item.val" v-if="item.type == 'input'" :placeholder="item.placeholder"></el-input>
-            <img class="required" src="../../../assets/img/require.png" alt="" v-if="item.require">
-            <img class="required" src="" alt="" v-else>
+            <el-input
+              v-model="item.val"
+              v-if="item.type == 'input'"
+              :placeholder="item.placeholder"
+            ></el-input>
+            <img
+              class="required"
+              src="../../../assets/img/require.png"
+              alt=""
+              v-if="item.require"
+            />
+            <img class="required" src="" alt="" v-else />
           </div>
           <div class="remark">
-            <img class="ts" src="../../../assets/img/tishi.png" alt="">
+            <img class="ts" src="../../../assets/img/tishi.png" alt="" />
             <div class="ts_f">{{ item.remark }}</div>
           </div>
         </div>
@@ -39,187 +60,193 @@ export default {
   data() {
     return {
       isShow: false,
-      options: [{
-        value: '选项1',
-        label: '黄金糕'
-      }, {
-        value: '选项2',
-        label: '双皮奶'
-      }],
-      options2: [{
-        value: '选项3',
-        label: '黄金糕'
-      }, {
-        value: '选项4',
-        label: '双皮奶'
-      }],
+      options: [
+        {
+          value: "选项1",
+          label: "黄金糕",
+        },
+        {
+          value: "选项2",
+          label: "双皮奶",
+        },
+      ],
+      options2: [
+        {
+          value: "选项3",
+          label: "黄金糕",
+        },
+        {
+          value: "选项4",
+          label: "双皮奶",
+        },
+      ],
       formList: [
         {
-          title: '所在省份：',
-          label: 'provinces',
-          type: 'select',
-          option: 'option',
-          val: '',
+          title: "所在省份：",
+          label: "provinces",
+          type: "select",
+          option: "option",
+          val: "",
           require: true,
-          placeholder: '请选择省份',
-          remark: '请选择省份'
+          placeholder: "请选择省份",
+          remark: "请选择省份",
         },
         {
-          title: '所在城市：',
-          label: 'city',
-          type: 'select',
-          option: 'option2',
-          val: '',
+          title: "所在城市：",
+          label: "city",
+          type: "select",
+          option: "option2",
+          val: "",
           require: true,
-          placeholder: '请选择城市',
-          remark: '请选择城市'
+          placeholder: "请选择城市",
+          remark: "请选择城市",
         },
         {
-          title: '企业名称：',
-          label: 'name',
-          type: 'input',
-          option: '',
-          val: '',
+          title: "企业名称：",
+          label: "name",
+          type: "input",
+          option: "",
+          val: "",
           require: true,
-          placeholder: '请输入工商注册的企业名称',
-          remark: '请输入企业名称'
+          placeholder: "请输入工商注册的企业名称",
+          remark: "请输入企业名称",
         },
         {
-          title: '注册地址：',
-          label: 'address',
-          type: 'input',
-          option: '',
-          val: '',
+          title: "注册地址：",
+          label: "address",
+          type: "input",
+          option: "",
+          val: "",
           require: false,
-          placeholder: '请输入企业工商注册地址',
-          remark: '请输入注册地址'
+          placeholder: "请输入企业工商注册地址",
+          remark: "请输入注册地址",
         },
         {
-          title: '公司办公电话：',
-          label: 'phone',
-          type: 'input',
-          option: '',
-          val: '',
+          title: "公司办公电话：",
+          label: "phone",
+          type: "input",
+          option: "",
+          val: "",
           require: true,
-          placeholder: '请输入公司电话',
-          remark: '请输入你的联系电话'
+          placeholder: "请输入公司电话",
+          remark: "请输入你的联系电话",
         },
         {
-          title: '企业信用代码：',
-          label: 'code',
-          type: 'input',
-          option: '',
-          val: '',
+          title: "企业信用代码：",
+          label: "code",
+          type: "input",
+          option: "",
+          val: "",
           require: false,
-          placeholder: '请输入企业信用代码',
-          remark: '请输入你的企业信用代码'
+          placeholder: "请输入企业信用代码",
+          remark: "请输入你的企业信用代码",
         },
         {
-          title: '联系人：',
-          label: 'contacts',
-          type: 'input',
-          option: '',
-          val: '',
+          title: "联系人：",
+          label: "contacts",
+          type: "input",
+          option: "",
+          val: "",
           require: true,
-          placeholder: '请输入联系人',
-          remark: '请输入联系人'
+          placeholder: "请输入联系人",
+          remark: "请输入联系人",
         },
         {
-          title: '手机号码：',
-          label: 'phoneNum',
-          type: 'input',
-          option: '',
-          val: '',
+          title: "手机号码：",
+          label: "phoneNum",
+          type: "input",
+          option: "",
+          val: "",
           require: true,
-          placeholder: '必须是13或15打头',
-          remark: '请输入你的手机号'
+          placeholder: "必须是13或15打头",
+          remark: "请输入你的手机号",
         },
         {
-          title: '邮箱：',
-          label: 'email',
-          type: 'input',
-          option: '',
-          val: '',
+          title: "邮箱：",
+          label: "email",
+          type: "input",
+          option: "",
+          val: "",
           require: true,
-          placeholder: 'XX@X.X（用于找回密码)',
-          remark: '请选择性输入'
+          placeholder: "XX@X.X（用于找回密码)",
+          remark: "请选择性输入",
         },
         {
-          title: '用户名：',
-          label: 'user',
-          type: 'input',
-          option: '',
-          val: '',
+          title: "用户名：",
+          label: "user",
+          type: "input",
+          option: "",
+          val: "",
           require: true,
-          placeholder: '请输入用户名',
-          remark: '请输入用户名'
+          placeholder: "请输入用户名",
+          remark: "请输入用户名",
         },
         {
-          title: '密码：',
-          label: 'pwd',
-          type: 'input',
-          option: '',
-          val: '',
+          title: "密码：",
+          label: "pwd",
+          type: "input",
+          option: "",
+          val: "",
           require: true,
-          placeholder: '请输入密码',
-          remark: '请输入密码'
+          placeholder: "请输入密码",
+          remark: "请输入密码",
         },
         {
-          title: '密码确认：',
-          label: 'pwdConfirm',
-          type: 'input',
-          option: '',
-          val: '',
+          title: "密码确认：",
+          label: "pwdConfirm",
+          type: "input",
+          option: "",
+          val: "",
           require: true,
-          placeholder: '请再次输入密码',
-          remark: '请再次输入密码'
-        }
+          placeholder: "请再次输入密码",
+          remark: "请再次输入密码",
+        },
       ],
       dataForm: {
-        provinces: '',
-        city: '',
-        name: '',
-        address: '',
-        phone: '',
-        code: '',
-        contacts: '',
-        phoneNum: '',
-        email: '',
-        user: '',
-        pwd: '',
-        pwdConfirm: '',
-      }
-    }
+        provinces: "",
+        city: "",
+        name: "",
+        address: "",
+        phone: "",
+        code: "",
+        contacts: "",
+        phoneNum: "",
+        email: "",
+        user: "",
+        pwd: "",
+        pwdConfirm: "",
+      },
+    };
   },
   methods: {
     next() {
-      let flag = false
+      let flag = false;
       for (let i = 0; i < this.formList.length; i++) {
         if (this.formList[i].require && !this.formList[i].val) {
-          this.$message.warning(this.formList[i].remark)
-          flag = true
-          break
+          this.$message.warning(this.formList[i].remark);
+          flag = true;
+          break;
         }
       }
       for (let key in this.dataForm) {
-        this.formList.forEach(item => {
+        this.formList.forEach((item) => {
           if (key == item.label) {
-            this.dataForm[key] = item.val
+            this.dataForm[key] = item.val;
           }
-        })
+        });
       }
-      console.log(this.dataForm)
-      this.isShow = false
-      this.$emit('next')
+      console.log(this.dataForm);
+      this.isShow = false;
+      this.$emit("next");
     },
     init() {
-      this.isShow = true
+      this.isShow = true;
     },
     close() {
-      this.isShow = false
-    }
-  }
-}
+      this.isShow = false;
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -229,7 +256,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, .6);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -245,7 +272,7 @@ export default {
     width: 1000px;
     height: 850px;
     background: rgba(2, 56, 152, 0.6);
-    border: 1px solid #1A8BFF;
+    border: 1px solid #1a8bff;
     border-radius: 10px;
 
     .close-btn {
@@ -263,7 +290,7 @@ export default {
       height: 80px;
       font-size: 32px;
       font-weight: 500;
-      color: #1ADCFF;
+      color: #1adcff;
       line-height: 80px;
       text-align: center;
 
@@ -296,7 +323,7 @@ export default {
           width: 120px;
           font-size: 18px;
           font-weight: 500;
-          color: #1ADCFF;
+          color: #1adcff;
           line-height: 20px;
         }
 
@@ -308,7 +335,7 @@ export default {
           /deep/ .el-input__inner {
             width: 100%;
             height: 38px;
-            border: 1px solid #1489CC;
+            border: 1px solid #1489cc;
             border-radius: 0px;
             background: rgba(255, 255, 255, 0);
             color: #ffffff;
@@ -336,7 +363,7 @@ export default {
             font-size: 16px;
             font-family: Source Han Sans CN;
             font-weight: 400;
-            color: #1ADCFF;
+            color: #1adcff;
             line-height: 20px;
           }
         }
