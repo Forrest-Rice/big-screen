@@ -17,9 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="pandect-center">
-      <map-zoning></map-zoning>
-    </div>
+    <div class="pandect-center"></div>
     <div class="pandect-right">
       <div class="progress-bar-box">
         <div class="progress-main">
@@ -40,10 +38,10 @@
           </div>
         </div>
       </div>
-
     </div>
+
     <!-- 文字弹框样式 -->
-    <tips :imgPath="'pwd.png'" :btnType='2' :btnMsg="'恭喜您，注册成功'" @close="tipClose" @change="tipChange"></tips>
+    <tips :imgPath="'pwd.png'" :btnType="2" :btnMsg="'恭喜您，注册成功'" @close="tipClose" @change="tipChange"></tips>
     <!--审核失败弹窗-->
     <pop-faile></pop-faile>
     <!--审核通过弹窗-->
@@ -54,6 +52,9 @@
     <pop-pass-two></pop-pass-two>
     <!-- 待审核 -->
     <pop-end></pop-end>
+
+    <!-- 管理部门 -->
+    <management ref="managementRef" />
     <!-- 数字排名 -->
     <!-- <data-rank
       :iconSrc="'phone.png'"
@@ -65,54 +66,138 @@
     <!--    <div style="width:400px;height:400px;">-->
 
     <!--    </div>-->
-
-
   </div>
 </template>
 
 <script>
+import management from "@/views/module/managementPage";
 import AcrossBar from "../../components/chart/across-bar-3d";
 import Pie3d from "../../components/chart/pie-3d";
-import DataRank from '../../components/data-rank';
-import MapZoning from '../../components/map-zoning';
+import DataRank from "../../components/data-rank";
+import MapZoning from "../../components/map-zoning";
 import PopEnd from "../../components/popup/pop-end";
 import PopFaile from "../../components/popup/pop-faile";
 import PopFaileTwo from "../../components/popup/pop-faile-two";
 import PopPass from "../../components/popup/pop-pass";
 import PopPassTwo from "../../components/popup/pop-pass-two";
-import tips from '../../components/tips';
+import tips from "../../components/tips";
 export default {
   name: "pandect",
-  components: { PopEnd, PopPassTwo, PopFaileTwo, PopPass, PopFaile, Pie3d, AcrossBar, tips, DataRank, MapZoning },
+  components: {
+    PopEnd,
+    PopPassTwo,
+    PopFaileTwo,
+    PopPass,
+    PopFaile,
+    Pie3d,
+    AcrossBar,
+    tips,
+    DataRank,
+    MapZoning,
+    management,
+  },
   data () {
     return {
       dataOverViewList: [
-        { label: '规划面积', bg: require('@/assets/img/pandect/planArea.png'), value: 55.5, unit: '亩' },
-        { label: '亩均指数', bg: require('@/assets/img/pandect/mujunzhishu.png'), value: '44%', unit: '' },
-        { label: '高新技术企业', bg: require('@/assets/img/pandect/gaoxinjishuqiye.png'), value: 152, unit: '家' },
-        { label: '专精特新企业', bg: require('@/assets/img/pandect/zhunjingtexinqiye.png'), value: 134, unit: '家' },
-        { label: '工业总产值', bg: require('@/assets/img/pandect/gongyezongchanzhi.png'), value: 464.02, unit: '亿元' },
-        { label: '政府补贴', bg: require('@/assets/img/pandect/zhengfubutie.png'), value: 215.13, unit: '亿元' },
-        { label: '营业收入', bg: require('@/assets/img/pandect/yingyeshouru.png'), value: 465.13, unit: '亿元' },
-        { label: '利润总额', bg: require('@/assets/img/pandect/liyunzonge.png'), value: 312.07, unit: '亿元' },
-        { label: '税收总额', bg: require('@/assets/img/pandect/suishouzonge.png'), value: 345.19, unit: '亿元' },
-        { label: '工业增长值', bg: require('@/assets/img/pandect/industrialGrowth.png'), value: 312.07, unit: '亿元' },
-        { label: '规上企业从业人数 ', bg: require('@/assets/img/pandect/congyerenshu.png'), value: 864310, unit: '人' },
-        { label: '电耗', bg: require('@/assets/img/pandect/dianhao.png'), value: 341.01, unit: '万度' },
-        { label: '能耗', bg: require('@/assets/img/pandect/nenghao.png'), value: 345.12, unit: '万度' },
-        { label: '规上企业', bg: require('@/assets/img/pandect/guishangqiye.png'), value: 125, unit: '家' },
-      ]
-    }
+        {
+          label: "规划面积",
+          bg: require("@/assets/img/pandect/planArea.png"),
+          value: 55.5,
+          unit: "亩",
+        },
+        {
+          label: "亩均指数",
+          bg: require("@/assets/img/pandect/mujunzhishu.png"),
+          value: "44%",
+          unit: "",
+        },
+        {
+          label: "高新技术企业",
+          bg: require("@/assets/img/pandect/gaoxinjishuqiye.png"),
+          value: 152,
+          unit: "家",
+        },
+        {
+          label: "专精特新企业",
+          bg: require("@/assets/img/pandect/zhunjingtexinqiye.png"),
+          value: 134,
+          unit: "家",
+        },
+        {
+          label: "工业总产值",
+          bg: require("@/assets/img/pandect/gongyezongchanzhi.png"),
+          value: 464.02,
+          unit: "亿元",
+        },
+        {
+          label: "政府补贴",
+          bg: require("@/assets/img/pandect/zhengfubutie.png"),
+          value: 215.13,
+          unit: "亿元",
+        },
+        {
+          label: "营业收入",
+          bg: require("@/assets/img/pandect/yingyeshouru.png"),
+          value: 465.13,
+          unit: "亿元",
+        },
+        {
+          label: "利润总额",
+          bg: require("@/assets/img/pandect/liyunzonge.png"),
+          value: 312.07,
+          unit: "亿元",
+        },
+        {
+          label: "税收总额",
+          bg: require("@/assets/img/pandect/suishouzonge.png"),
+          value: 345.19,
+          unit: "亿元",
+        },
+        {
+          label: "工业增长值",
+          bg: require("@/assets/img/pandect/industrialGrowth.png"),
+          value: 312.07,
+          unit: "亿元",
+        },
+        {
+          label: "规上企业从业人数 ",
+          bg: require("@/assets/img/pandect/congyerenshu.png"),
+          value: 864310,
+          unit: "人",
+        },
+        {
+          label: "电耗",
+          bg: require("@/assets/img/pandect/dianhao.png"),
+          value: 341.01,
+          unit: "万度",
+        },
+        {
+          label: "能耗",
+          bg: require("@/assets/img/pandect/nenghao.png"),
+          value: 345.12,
+          unit: "万度",
+        },
+        {
+          label: "规上企业",
+          bg: require("@/assets/img/pandect/guishangqiye.png"),
+          value: 125,
+          unit: "家",
+        },
+      ],
+    };
+  },
+  mounted () {
+    this.$refs.managementRef.init()
   },
   methods: {
     tipClose () {
-      console.log("<>>>>>>>>>>tipClose")
+      console.log("<>>>>>>>>>>tipClose");
     },
     tipChange () {
-      console.log("<>>>>>>>>>>tipChange")
-    }
+      console.log("<>>>>>>>>>>tipChange");
+    },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -136,7 +221,7 @@ export default {
       .letf-title {
         font-size: 16px;
         font-weight: 400;
-        color: #FFFFFF;
+        color: #ffffff;
       }
 
       .target {
@@ -147,7 +232,7 @@ export default {
         text-align: right;
         font-size: 14px;
         font-weight: 400;
-        color: #00B8FF;
+        color: #00b8ff;
       }
     }
 
@@ -164,7 +249,7 @@ export default {
         font-size: 16px;
         font-family: Source Han Sans CN;
         font-weight: 400;
-        color: #FFFFFF;
+        color: #ffffff;
         line-height: 45px;
         text-align: center;
       }
@@ -180,7 +265,7 @@ export default {
           left: 20px;
           font-size: 12px;
           font-weight: 400;
-          color: #FFFFFF;
+          color: #ffffff;
           line-height: 20px;
           text-align: center;
 
@@ -190,7 +275,7 @@ export default {
             font-size: 14px;
             font-family: Source Han Sans CN;
             font-weight: 600;
-            color: #F8B62D;
+            color: #f8b62d;
           }
         }
       }
@@ -200,7 +285,7 @@ export default {
   .pandect-center {
     width: 711px;
     height: 785px;
-    background: #0D96CC;
+    background: #0d96cc;
   }
 
   .pandect-right {
@@ -222,7 +307,7 @@ export default {
       .progress-main {
         width: calc(100% - 55px);
         height: 25px;
-        background-color: #00B5FD;
+        background-color: #00b5fd;
         border-radius: 15px;
         position: relative;
         overflow: hidden;
@@ -234,7 +319,11 @@ export default {
           top: 0;
           left: 0;
           border-radius: 15px;
-          background-image: repeating-linear-gradient(-45deg, #009DFC, #009DFC 5px, #00F3FE 0, #00F3FE 7px);
+          background-image: repeating-linear-gradient(-45deg,
+              #009dfc,
+              #009dfc 5px,
+              #00f3fe 0,
+              #00f3fe 7px);
         }
       }
 
@@ -247,7 +336,7 @@ export default {
         font-size: 18px;
         font-family: Source Han Sans CN;
         font-weight: 400;
-        color: #00B5FD;
+        color: #00b5fd;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -265,7 +354,7 @@ export default {
       font-size: 18px;
       font-family: Source Han Sans CN;
       font-weight: 400;
-      color: #00B5FD;
+      color: #00b5fd;
     }
 
     .data-overview-box {
@@ -290,11 +379,11 @@ export default {
           margin-right: 0;
         }
 
-        &:nth-last-of-type(-n+2) {
+        &:nth-last-of-type(-n + 2) {
           margin-bottom: 0;
         }
 
-        &:nth-child(-n+2) {
+        &:nth-child(-n + 2) {
           margin-top: 0;
         }
 
@@ -316,7 +405,7 @@ export default {
             font-size: 26px;
             font-family: Source Han Sans CN;
             font-weight: 500;
-            color: #F8B62D;
+            color: #f8b62d;
             // line-height: 24px;
           }
 
@@ -324,7 +413,7 @@ export default {
             font-size: 12px;
             font-family: Source Han Sans CN;
             font-weight: 400;
-            color: #FFFFFF;
+            color: #ffffff;
           }
 
           .data-title {
@@ -332,7 +421,7 @@ export default {
             font-size: 14px;
             font-family: Source Han Sans CN;
             font-weight: 400;
-            color: #FFFFFF;
+            color: #ffffff;
           }
         }
       }
