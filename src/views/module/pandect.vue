@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="pandect-center">
-
+      <map-zoning></map-zoning>
     </div>
     <div class="pandect-right">
       <div class="progress-bar-box">
@@ -63,7 +63,7 @@
       :rank="'6'"
     ></data-rank> -->
     <!--    <div style="width:400px;height:400px;">-->
-    <!--      <map-zoning></map-zoning>-->
+
     <!--    </div>-->
 
 
@@ -75,16 +75,16 @@ import AcrossBar from "../../components/chart/across-bar-3d";
 import Pie3d from "../../components/chart/pie-3d";
 import DataRank from '../../components/data-rank';
 import MapZoning from '../../components/map-zoning';
-import tips from '../../components/tips'
-import PopFaile from "../../components/popup/pop-faile";
-import PopPass from "../../components/popup/pop-pass";
-import PopFaileTwo from "../../components/popup/pop-faile-two";
-import PopPassTwo from "../../components/popup/pop-pass-two";
 import PopEnd from "../../components/popup/pop-end";
+import PopFaile from "../../components/popup/pop-faile";
+import PopFaileTwo from "../../components/popup/pop-faile-two";
+import PopPass from "../../components/popup/pop-pass";
+import PopPassTwo from "../../components/popup/pop-pass-two";
+import tips from '../../components/tips';
 export default {
   name: "pandect",
   components: { PopEnd, PopPassTwo, PopFaileTwo, PopPass, PopFaile, Pie3d, AcrossBar, tips, DataRank, MapZoning },
-  data() {
+  data () {
     return {
       dataOverViewList: [
         { label: '规划面积', bg: require('@/assets/img/pandect/planArea.png'), value: 55.5, unit: '亩' },
@@ -105,10 +105,10 @@ export default {
     }
   },
   methods: {
-    tipClose() {
+    tipClose () {
       console.log("<>>>>>>>>>>tipClose")
     },
-    tipChange() {
+    tipChange () {
       console.log("<>>>>>>>>>>tipChange")
     }
   },
@@ -310,7 +310,7 @@ export default {
           display: flex;
           flex-direction: column;
           // align-items: center;
-              justify-content: center;
+          justify-content: center;
 
           .data {
             font-size: 26px;
