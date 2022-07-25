@@ -13,9 +13,9 @@ import './styles/common.scss';
 import dataV from '@jiaminghi/data-view';
 import AvueFormDesign from '@sscfaith/avue-form-design';
 import AvueUeditor from 'avue-plugin-ueditor';
-import echarts from 'echarts';
+import * as eCharts from 'echarts';
 import '../public/util/flexible';
-Vue.prototype.$echarts = echarts
+Vue.prototype.$eCharts = eCharts
 
 Vue.use(router)
 Vue.use(VueAxios, axios)

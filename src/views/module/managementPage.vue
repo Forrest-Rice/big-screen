@@ -9,46 +9,29 @@
       </div>
       <header>
         <div class="operate-button-box">
-          <el-button
-            class="operate-botton-item"
-            v-for="(item, index) in operateList"
-            :key="index"
-            type="primary "
-            @click="changeOperate(index)"
-          >
+          <el-button class="operate-botton-item" v-for="(item, index) in operateList" :key="index" type="primary "
+            @click="changeOperate(index)">
             {{ item }}
           </el-button>
         </div>
       </header>
       <main>
-        <div class="left-box">
+        <!-- <div class="left-box">
           <div class="title-row">
             <div class="title" v-for="(item, index) in titleList" :key="index">
               {{ item.label }}
             </div>
           </div>
-          <div
-            class="content-row"
-            v-for="(item, index) in indicatorList[0]"
-            :key="index"
-          >
+          <div class="content-row" v-for="(item, index) in indicatorList[0]" :key="index">
             <el-checkbox class="content" v-model="item.check">
               <div>
-                <el-image
-                  class="indicator-image"
-                  :src="tishiImage"
-                  fit="cover"
-                ></el-image>
+                <el-image class="indicator-image" :src="tishiImage" fit="cover"></el-image>
                 <span class="indicator-code">{{ item.indicatorCode }}</span>
               </div>
             </el-checkbox>
             <div class="content">
-              <el-input
-                class="indicator-input"
-                suffix-icon="el-icon-edit"
-                v-model="item.indicatorName"
-                placeholder="Please input"
-              />
+              <el-input class="indicator-input" suffix-icon="el-icon-edit" v-model="item.indicatorName"
+                placeholder="Please input" />
             </div>
             <div class="content">
               <span class="indicator-data">{{ item.indicatorData }}</span>
@@ -64,28 +47,16 @@
               {{ item.label }}
             </div>
           </div>
-          <div
-            class="content-row"
-            v-for="(item, index) in indicatorList[1]"
-            :key="index"
-          >
+          <div class="content-row" v-for="(item, index) in indicatorList[1]" :key="index">
             <el-checkbox v-model="item.check">
               <div class="content">
-                <el-image
-                  class="indicator-image"
-                  :src="tishiImage"
-                  fit="cover"
-                ></el-image>
+                <el-image class="indicator-image" :src="tishiImage" fit="cover"></el-image>
                 <span class="indicator-code">{{ item.indicatorCode }}</span>
               </div>
             </el-checkbox>
             <div class="content">
-              <el-input
-                class="indicator-input"
-                suffix-icon="el-icon-edit"
-                v-model="item.indicatorName"
-                placeholder="Please input"
-              />
+              <el-input class="indicator-input" suffix-icon="el-icon-edit" v-model="item.indicatorName"
+                placeholder="Please input" />
             </div>
             <div class="content">
               <span class="indicator-data">{{ item.indicatorData }}</span>
@@ -94,16 +65,39 @@
               <span class="indicator-unit">{{ item.indicatorUnit }}</span>
             </div>
           </div>
+        </div> -->
+        <div class="content-row" v-for="(item, index) in indicatorList" :key="index">
+          <div class="title-row">
+            <div class="title-item" v-for="(titleItem, titleIndex) in titleList" :key="titleIndex">
+              {{ titleItem.label }}
+            </div>
+          </div>
+          <div class="content-row-item" v-for="(rowItem, rowIndex) in item" :key="rowIndex">
+            <el-checkbox class="content" v-model="rowItem.check">
+              <div>
+                <el-image class="indicator-image" :src="tishiImage" fit="cover"></el-image>
+                <span class="indicator-code">{{ rowItem.indicatorCode }}</span>
+              </div>
+            </el-checkbox>
+            <div class="content">
+              <el-input class="indicator-input" suffix-icon="el-icon-edit" v-model="rowItem.indicatorName"
+                placeholder="Please input" />
+            </div>
+            <div class="content">
+              <span class="indicator-data">{{ rowItem.indicatorData }}</span>
+            </div>
+            <div class="content">
+              <span class="indicator-unit">{{ rowItem.indicatorUnit }}</span>
+            </div>
+          </div>
         </div>
       </main>
 
       <footer class="btn-next">
         <div class="foot-content-box">
           <span class="footer-title">特别说明：</span>
-          <span class="footer-content"
-            >五好园区建设进度（033）≤100%；利润总额（046）＜营业收入（045）；税收总额（047）＜营业收入（045）；工业增长值（048）＜工业总产值（043）
-            指标最多新增3个，删除10个</span
-          >
+          <span class="footer-content">五好园区建设进度（033）≤100%；利润总额（046）＜营业收入（045）；税收总额（047）＜营业收入（045）；工业增长值（048）＜工业总产值（043）
+            指标最多新增3个，删除10个</span>
         </div>
         <div class="footer-button-box">
           <el-button type="primary" @click="save">保存</el-button>
@@ -127,7 +121,7 @@
 // import submitSucceed from "./submitSucceed";
 export default {
   name: "entryMetrics",
-  data() {
+  data () {
     return {
       dialogVisible: false,
       operateList: ["新增指标", "删除指标", "全选", "区级"],
@@ -145,7 +139,7 @@ export default {
     };
   },
   //   components: { deleteMetrics, submitSucceed },
-  created() {
+  created () {
     const temp = [];
     const temp2 = [];
     for (let index = 0; index < 20; index++) {
@@ -167,14 +161,14 @@ export default {
     this.indicatorList = [temp, temp2];
   },
   methods: {
-    next() {},
-    init() {
+    next () { },
+    init () {
       this.dialogVisible = true;
     },
-    close() {
+    close () {
       this.dialogVisible = false;
     },
-    changeOperate(val) {
+    changeOperate (val) {
       const allSelect = () => {
         this.indicatorList.forEach((element) => {
           element.forEach((eleItem) => {
@@ -191,7 +185,7 @@ export default {
       funMap.get(val).call();
       this.operateFlag = val;
     },
-    save() {
+    save () {
       this.close();
     },
 
@@ -199,17 +193,17 @@ export default {
      * @description: 提交方法
      * @return {*}
      */
-    submit() {
+    submit () {
       // 提交错误
       // this.$emit('submitError')
       // this.close()
       // 提交成功
       this.$refs.submitSucceedRef.init();
     },
-    back() {
+    back () {
       this.close();
     },
-    submitSucceed() {
+    submitSucceed () {
       this.dialogVisible = false;
     },
   },
@@ -345,132 +339,267 @@ export default {
 
     overflow-y: auto;
 
-    .left-box {
-      width: 44%;
-      height: 100%;
-    }
-
-    .right-box {
-      width: 44%;
-      height: 100%;
-    }
-
-    .title-row {
-      display: flex;
-
-      .title {
-        width: 80px;
-        height: 32px;
-        font-size: 20px;
-        font-family: Source Han Sans CN;
-        font-weight: 500;
-        color: #1adcff;
-        line-height: 20px;
-        margin: 0 11px 10px 11px;
-        display: flex;
-        align-items: center;
-
-        &:first-child {
-          margin-left: 0;
-        }
-
-        &:last-child {
-          margin-right: 0;
-        }
-
-        &:nth-child(2) {
-          width: 172px;
-        }
-      }
-    }
-
     .content-row {
-      display: flex;
+      width: 100%;
+      // display: flex;
+      // justify-content: space-between;
+      align-items: center;
 
-      ::v-deep .el-checkbox {
-        display: flex;
-        align-items: center;
-      }
-
-      .content {
-        width: 80px;
-        height: 32px;
-        border: 1px solid #1adcff;
-        margin: 10px;
+      .title-row {
+        width: 100%;
         display: flex;
         align-items: center;
 
-        &:first-child {
-          border: none;
-          margin-left: 0;
-        }
-
-        &:nth-child(2) {
-          width: 172px;
-        }
-
-        .indicator-image {
-          width: 18px;
-          height: 18px;
-        }
-
-        .indicator-code {
-          font-size: 14px;
+        .title-item {
+          width: 80px;
+          height: 32px;
+          font-size: 20px;
           font-family: Source Han Sans CN;
           font-weight: 500;
           color: #1adcff;
-          margin-left: 12px;
-        }
+          line-height: 20px;
+          margin: 0 11px 10px 11px;
+          display: flex;
+          align-items: center;
 
-        ::v-deep .indicator-input {
-          .el-input__inner {
-            width: 172px;
-            height: 32px;
-            border: none;
+          &:first-child {
+            margin-left: 0;
           }
 
-          .el-input__icon {
-            color: #1adcff;
+          &:last-child {
+            margin-right: 0;
+          }
+
+          &:nth-child(2) {
+            width: 172px;
+          }
+        }
+
+      }
+
+      .content-row-item {
+        width: 100%;
+        // height: 100%;
+        display: flex;
+        align-items: center;
+        // justify-content: space-between;
+
+        .content {
+          width: 80px;
+          height: 32px;
+          border: 1px solid #1adcff;
+          margin: 10px;
+          display: flex;
+          align-items: center;
+
+          &:first-child {
+            border: none;
+            margin-left: 0;
+          }
+
+          &:nth-child(2) {
+            width: 172px;
+          }
+
+          .indicator-image {
+            width: 18px;
+            height: 18px;
+          }
+
+          .indicator-code {
             font-size: 14px;
+            font-family: Source Han Sans CN;
+            font-weight: 500;
+            color: #1adcff;
+            margin-left: 12px;
+          }
+
+          ::v-deep .indicator-input {
+            .el-input__inner {
+              width: 172px;
+              height: 32px;
+              border: none;
+              background-color: transparent;
+
+              font-size: 12px;
+              font-family: Source Han Sans CN;
+              font-weight: 400;
+              color: #1ADCFF;
+              line-height: 20px;
+              // el-input__inner
+            }
+
+            .el-input__icon {
+              color: #1adcff;
+              font-size: 14px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+
+          .indicator-data {
+            font-size: 12px;
+            font-family: Source Han Sans CN;
+            font-weight: 500;
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
+            height: 100%;
+          }
+
+          .indicator-unit {
+            font-size: 14px;
+            font-family: Source Han Sans CN;
+            font-weight: 400;
+            color: #1adcff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
           }
         }
 
-        .indicator-data {
-          font-size: 12px;
-          font-family: Source Han Sans CN;
-          font-weight: 500;
-          color: #ffffff;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 100%;
-          height: 100%;
+        &:first-child {
+          margin-top: 0;
         }
 
-        .indicator-unit {
-          font-size: 14px;
-          font-family: Source Han Sans CN;
-          font-weight: 400;
-          color: #1adcff;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 100%;
-          height: 100%;
+        &:last-child {
+          margin-bottom: 0;
         }
       }
 
-      &:first-child {
-        margin-top: 0;
-      }
-
-      &:last-child {
-        margin-bottom: 0;
-      }
     }
+
+    // .left-box {
+    //   width: 44%;
+    //   height: 100%;
+    // }
+
+    // .right-box {
+    //   width: 44%;
+    //   height: 100%;
+    // }
+
+    // .title-row {
+    //   display: flex;
+
+    //   .title {
+    //     width: 80px;
+    //     height: 32px;
+    //     font-size: 20px;
+    //     font-family: Source Han Sans CN;
+    //     font-weight: 500;
+    //     color: #1adcff;
+    //     line-height: 20px;
+    //     margin: 0 11px 10px 11px;
+    //     display: flex;
+    //     align-items: center;
+
+    //     &:first-child {
+    //       margin-left: 0;
+    //     }
+
+    //     &:last-child {
+    //       margin-right: 0;
+    //     }
+
+    //     &:nth-child(2) {
+    //       width: 172px;
+    //     }
+    //   }
+    // }
+
+    // .content-row {
+    //   display: flex;
+
+    //   ::v-deep .el-checkbox {
+    //     display: flex;
+    //     align-items: center;
+    //   }
+
+    //   .content {
+    //     width: 80px;
+    //     height: 32px;
+    //     border: 1px solid #1adcff;
+    //     margin: 10px;
+    //     display: flex;
+    //     align-items: center;
+
+    //     &:first-child {
+    //       border: none;
+    //       margin-left: 0;
+    //     }
+
+    //     &:nth-child(2) {
+    //       width: 172px;
+    //     }
+
+    //     .indicator-image {
+    //       width: 18px;
+    //       height: 18px;
+    //     }
+
+    //     .indicator-code {
+    //       font-size: 14px;
+    //       font-family: Source Han Sans CN;
+    //       font-weight: 500;
+    //       color: #1adcff;
+    //       margin-left: 12px;
+    //     }
+
+    //     ::v-deep .indicator-input {
+    //       .el-input__inner {
+    //         width: 172px;
+    //         height: 32px;
+    //         border: none;
+    //       }
+
+    //       .el-input__icon {
+    //         color: #1adcff;
+    //         font-size: 14px;
+    //         display: flex;
+    //         justify-content: center;
+    //         align-items: center;
+    //       }
+    //     }
+
+    //     .indicator-data {
+    //       font-size: 12px;
+    //       font-family: Source Han Sans CN;
+    //       font-weight: 500;
+    //       color: #ffffff;
+    //       display: flex;
+    //       justify-content: center;
+    //       align-items: center;
+    //       width: 100%;
+    //       height: 100%;
+    //     }
+
+    //     .indicator-unit {
+    //       font-size: 14px;
+    //       font-family: Source Han Sans CN;
+    //       font-weight: 400;
+    //       color: #1adcff;
+    //       display: flex;
+    //       justify-content: center;
+    //       align-items: center;
+    //       width: 100%;
+    //       height: 100%;
+    //     }
+    //   }
+
+    //   &:first-child {
+    //     margin-top: 0;
+    //   }
+
+    //   &:last-child {
+    //     margin-bottom: 0;
+    //   }
+    // }
   }
 
   footer {
